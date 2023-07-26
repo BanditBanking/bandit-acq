@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+
+  bandit-acq:
+    image: bandit-acq
+    build:
+      context: ..
+      dockerfile: src/Bandit.ACQ.Daemon/Dockerfile
+    ports:
+      - 6003:443
+    environment: 
+      ACQ__Analytics__Activated: "false"
+      ACQ__Analytics__ServerAddress: 172.27.0.3
+      ACQ__Analytics__ServerPort: 6002
+      ACQ__Analytics__ServerCertificate: "/certs/tristesse.pfx"
+      ACQ__SSL__ServerCertificate: "tristesse.pfx"
+      ACQ__API__Title: "Development ACQ API"
+      ACQ__API__Description: "This page provides an interactive documentation of the development ACQ API."
+      ACQ__API__ErrorDocumentationUri: "https://github.com/TristesseLOL/bandit-acq/blob/master/documentation/errors.md#"
+      ACQ__BankNet__BankId: "bandit-dev-bank"
+      ACQ__BankNet__ConfigPath: "/config/banknet.json"
+      ASPNETCORE_URLS: "https://+:443;"
+      ASPNETCORE_Kestrel__Certificates__Default__Path: "/certs/tristesse.pfx"
+      Logging__LogLevel__Default: "Debug"
+    volumes:
+      - ../certs/:/certs/
+      - ../config/:/config/
+    networks:
+      - banknet
+
+networks: 
+  banknet: 
+    name: bandit-banknet
+    external: true 
+
+

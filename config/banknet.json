@@ -1,0 +1,14 @@
+[
+	{
+		"Id": "bandit-picsou",
+		"Ip": "172.27.0.2",
+		"Port": 6000,
+		"Certificate": "/certs/tristesse.pfx"
+	},
+	{
+		"Id": "bandit-donalutse",
+		"Ip": "127.0.0.1",
+		"Port": 20001,
+		"Certificate": "/certs/tristesse.pfx"
+	}
+]
